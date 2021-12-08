@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->longText("first_thumbnail");
             $table->longText("second_thumbnail");
             $table->longText("main_thumbnail");
+            $table->string("slug");
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger("published_id");
             $table->foreign("category_id")->references("id")->on("categories");

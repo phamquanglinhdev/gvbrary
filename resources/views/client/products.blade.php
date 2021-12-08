@@ -43,9 +43,9 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <a href="#"><img src="{{$product->main_thumbnail}}" alt=""></a>
+                                        <a href="{{route("product",$product->slug)}}"><img src="{{$product->main_thumbnail}}" alt=""></a>
                                     </div>
-                                    <a href="#">
+                                    <a href="{{route("product",$product->slug)}}">
                                         <div class="down-content p-2">
                                             <h4>{{$product->name}}</h4>
                                             @if($product->price!=null)

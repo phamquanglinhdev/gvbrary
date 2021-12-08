@@ -29,6 +29,8 @@ class ProductCrudController extends CrudController
         CRUD::setModel(\App\Models\Product::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
         CRUD::setEntityNameStrings('Ấn phẩm', 'Các ấn phẩm');
+        $this->crud->addButtonFromModelFunction("line","viewOnWeb","viewOnWeb","line");
+        $this->crud->denyAccess("show");
     }
 
     /**
@@ -39,6 +41,9 @@ class ProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        if(backpack_user()->role!=0){
+            $this->crud->addClause("where","published_id","=",backpack_user()->id);
+        }
         CRUD::column('name')->label("Tên sách");
         CRUD::column('price')->label("Giá thuê");
         CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Chưa được mượn", "Đã mượn"]);
@@ -48,7 +53,8 @@ class ProductCrudController extends CrudController
             'label'=>'Danh mục',
             'type' => 'select',
             'entity'=>'Category',
-            'model'=>'App\Models\Category'
+            'model'=>'App\Models\Category',
+            'attribute'=>"name",
         ]);
         CRUD::addColumn([
             'name' => 'published_id',
@@ -84,6 +90,7 @@ class ProductCrudController extends CrudController
         CRUD::field('first_thumbnail')->type("image")->label("Ảnh bìa thứ nhất (Nên chọn ảnh bìa rộng)");
         CRUD::field('second_thumbnail')->type("image")->label("Ảnh bìa thứ hai (Nên chọn ảnh bìa rộng)");
         CRUD::field('main_thumbnail')->type("image")->label("Ảnh sản phẩm (Nên chọn ảnh dọc)");
+        CRUD::field("slug")->type("hidden")->value("a");
         CRUD::addField([
             'name' => 'category_id',
             'label'=>'Danh mục',
@@ -92,12 +99,14 @@ class ProductCrudController extends CrudController
             'model'=>'App\Models\Category',
             'attribute'=>"name"
         ]);
-        CRUD::addField([
-            'name' => 'published_id',
-            'type'=>'hidden',
-            'value'=>backpack_user()->id,
-        ]);
+       if(backpack_user()->role!=0){
+           CRUD::addField([
+               'name' => 'published_id',
+               'type'=>'hidden',
+               'value'=>backpack_user()->id,
+           ]);
 
+       }
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');

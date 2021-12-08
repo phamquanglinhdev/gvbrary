@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\IndexController::class,"index"])->name("index");
 Route::get("/products/{category?}/{page?}",[\App\Http\Controllers\ProductController::class,"index","category","page"])->where(["category","page"])->name("products");
-Route::get("/product/{slug?}",[\App\Http\Controllers\ProductController::class,"show","slug"])->where(["slug"])->name("product");
+Route::get("/product/{slug}",[\App\Http\Controllers\ProductController::class,"show","slug"])->where(["slug"])->name("product");
 Route::get("/about",[\App\Http\Controllers\AboutController::class,"index"])->name("about");
 Route::get("/contact",[\App\Http\Controllers\ContactController::class,"index"])->name("contact");

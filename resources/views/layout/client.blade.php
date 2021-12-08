@@ -80,6 +80,7 @@
                                     <li><a href="#">Thông tin tài khoản</a></li>
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
                                     <li><a href="#">Sách đã mượn (thuê)</a></li>
+                                    <li><a href="{{route("backpack.auth.logout")}}">Đăng xuất</a></li>
                                     @if(backpack_user()->role<=1)
                                         <li><a href="#">Quản lý thanh toán</a></li>
                                     @endif
@@ -90,6 +91,9 @@
                             <li class=""><a href="#"><i class="fas fa-cart-plus"></i>
                                     <div class="badge badge-danger">0</div>
                                 </a></li>
+                        @else
+                            <li><a href="{{route("backpack.auth.login")}}">Đăng nhập</a></li>
+                            <li><a href="{{route("backpack.auth.register")}}">Đăng ký</a></li>
                         @endif
                     </ul>
                     <a class='menu-trigger'>
