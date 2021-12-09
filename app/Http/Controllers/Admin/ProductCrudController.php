@@ -115,14 +115,13 @@ class ProductCrudController extends CrudController
             'model'=>'App\Models\Category',
             'attribute'=>"name"
         ]);
-       if(backpack_user()->role!=0){
+
            CRUD::addField([
                'name' => 'published_id',
                'type'=>'hidden',
                'value'=>backpack_user()->id,
            ]);
 
-       }
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
