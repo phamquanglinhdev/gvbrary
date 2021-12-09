@@ -87,10 +87,26 @@ class ProductCrudController extends CrudController
         CRUD::field('price')->label("Giá cho thuê")->attributes(["placeholder"=>"Để trống nếu miễn phí cho thuê"]);
         CRUD::field('description')->type("ckeditor")->label("Giới thiệu về sách");
         CRUD::field('status')->label("Trạng thái")->type("select_from_array")->options(["Chưa được mượn", "Đã mượn"]);
-        CRUD::field('first_thumbnail')->type("image")->label("Ảnh bìa thứ nhất (Nên chọn ảnh bìa rộng)");
-        CRUD::field('second_thumbnail')->type("image")->label("Ảnh bìa thứ hai (Nên chọn ảnh bìa rộng)");
-        CRUD::field('main_thumbnail')->type("image")->label("Ảnh sản phẩm (Nên chọn ảnh dọc)");
+        CRUD::addField([
+            'name' => 'first_thumbnail',
+            'type' => 'image',
+            'crop'=>true,
+            'aspect_ratio' => 2,
+        ]);
+        CRUD::addField([
+            'name' => 'second_thumbnail',
+            'type' => 'image',
+            'crop'=>true,
+            'aspect_ratio' => 2,
+        ]);
+        CRUD::addField([
+            'name' => 'main_thumbnail',
+            'type' => 'image',
+            'crop'=>true,
+            'aspect_ratio' => 1,
+        ]);
         CRUD::field("slug")->type("hidden")->value("a");
+
         CRUD::addField([
             'name' => 'category_id',
             'label'=>'Danh mục',
@@ -110,7 +126,7 @@ class ProductCrudController extends CrudController
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']);
          */
     }
 

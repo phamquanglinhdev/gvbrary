@@ -1,0 +1,185 @@
+
+
+.prolife  {
+    max-width: 1250px;
+    margin: 30px auto 30px;
+    padding: 0 !important;
+    width: 90%;
+    background-color: #fff;
+}
+
+
+
+.prolife .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.prolife .photo {
+    width: 200px;
+    height: 200px;
+    margin-top: -120px;
+    border-radius: 100px;
+    border: 4px solid #fff;
+}
+.prolife p{
+    line-height: 40px!important;
+}
+.prolife .active {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    position: absolute;
+    right: calc(50% - 70px);
+    top: 75px;
+    background-color: #FFC107;
+    border: 3px solid #fff;
+}
+
+@media (max-width:990px) {
+    .prolife .active {
+        right: calc(50% - 60px);
+        top: 50px;
+    }
+}
+
+.prolife .name {
+    margin-top: 20px;
+    font-family: "Open Sans", serif;
+    font-weight: 600;
+    font-size: 18pt;
+    color: #777;
+}
+
+.prolife .info {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11pt;
+    color: #aaa;
+}
+
+.prolife .stats {
+    margin-top: 25px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ededed;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.prolife .number-stat {
+    padding: 0px;
+    font-size: 14pt;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: #aaa;
+}
+
+.prolife .desc-stat {
+    margin-top: -15px;
+    font-size: 10pt;
+    color: #bbb;
+}
+
+.prolife .desc {
+    text-align: center;
+    margin-top: 25px;
+    margin: 25px 40px;
+    color: #999;
+    font-size: 11pt;
+    font-family: "Open Sans", serif;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ededed;
+}
+
+.prolife .social {
+    margin: 5px 0 12px 0;
+    text-align: center;
+    display: inline-block;
+    font-size: 20pt;
+}
+
+.prolife .social i {
+    cursor: pointer;
+    margin: 0 15px;
+}
+
+.prolife .social i:nth-child(1)  { color: #4267b2; }
+.prolife .social i:nth-child(2)  { color: #1da1f2; }
+.prolife .social i:nth-child(3)  { color: #bd081c; }
+.prolife .social i:nth-child(4)  { color: #36465d; }
+
+.prolife .right {
+    padding: 0 25px 0 25px !important;
+}
+
+.prolife .nav {
+    display: inline-flex;
+}
+
+.prolife .nav li {
+    margin: 40px 30px 0 10px;
+    cursor: pointer;
+    font-size: 13pt;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: #888;
+}
+
+.prolife  .nav li:hover,.nav-current  {
+    color: #999;
+    border-bottom: 2px solid #999;
+}
+
+.prolife .follow {
+    position: absolute;
+    right: 8%;
+    top: 35px;
+    font-size: 11pt;
+    background-color: #42b1fa;
+    color: #fff;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all .4s;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.prolife  .follow:hover {
+    box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.2);
+}
+
+@media (max-width:990px) {
+    .prolife .nav {
+        display: none;
+    }
+
+    .prolife .follow {
+        width: 50%;
+        margin-left: 25%;
+        display: block;
+        position: unset;
+        text-align: center;
+    }
+}
+.prolife .gallery  {
+    margin-top: 35px;
+}
+
+.prolife .gallery div {
+    margin-bottom: 30px;
+}
+
+.prolife .gallery img {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    max-width: 100%;
+}
+
+

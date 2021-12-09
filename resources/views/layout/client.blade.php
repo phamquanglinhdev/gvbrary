@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{asset("assets/css/owl-carousel.css")}}">
 
     <link rel="stylesheet" href="{{asset("assets/css/lightbox.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/css/style.css")}}">
+    <script src="{{asset("assets/js/index.var.js")}}"></script>
 </head>
 
 <body>
@@ -46,8 +48,11 @@
             <div class="col-12">
                 <nav class="main-nav row">
                     <!-- ***** Logo Start ***** -->
-                    <a href="{{route("index")}}" class="logo col-md-3 col-12">
+                    <a href="{{route("index")}}" class="d-lg-block d-none logo col-md-3 col-12">
                         <img src="{{asset("assets/images/logo.png")}}" class="w-100">
+                    </a>
+                    <a href="{{route("index")}}" class="d-lg-none d-block logo col-md-3 col-12">
+                        <img src="{{asset("assets/images/logo.png")}}" class="w-50">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -77,18 +82,22 @@
                             <li class="submenu">
                                 <a href="javascript:;"><i class="fas fa-user"></i> {{backpack_user()->name}}</a>
                                 <ul>
-                                    <li><a href="#">Thông tin tài khoản</a></li>
+                                    <li><a href="{{route("user.profile")}}">Thông tin tài khoản</a></li>
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
                                     <li><a href="#">Sách đã mượn (thuê)</a></li>
                                     <li><a href="{{route("backpack.auth.logout")}}">Đăng xuất</a></li>
                                     @if(backpack_user()->role<=1)
                                         <li><a href="#">Quản lý thanh toán</a></li>
+                                        <li><a href="{{route("request.index")}}">Quản lý yêu cầu mượn sách</a></li>
+                                    @endif
+                                    @if(backpack_user()->role==0)
+                                        <li><a href="{{route("backpack.dashboard")}}">Quản trị</a></li>
                                     @endif
                                 </ul>
                             </li>
                             <li class=""><a href="#"><i
                                         class="fas fa-coins"></i> {{number_format(backpack_user()->coin)}} đ</a></li>
-                            <li class=""><a href="#"><i class="fas fa-cart-plus"></i>
+                            <li class=""><a href="{{route("cart")}}"><i class="fas fa-cart-plus"></i>
                                     <div class="badge badge-danger">0</div>
                                 </a></li>
                         @else

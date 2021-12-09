@@ -1,5 +1,15 @@
 @extends("layout.client")
 @section("banner")
+    @if (session('success'))
+        <script>
+            new AWN().success('{{session('success')}}')
+        </script>
+    @endif
+    @if (session('fail'))
+        <script>
+            new AWN().warning('{{session('fail')}}')
+        </script>
+    @endif
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
         <div class="container-fluid">
@@ -141,8 +151,7 @@
                                                                 class="fa fa-eye"></i></a></li>
                                                     <li><a href="{{route("product",$member->slug)}}"><i
                                                                 class="fa fa-heart"></i></a></li>
-                                                    <li><a href="{{route("product",$member->slug)}}"><i
-                                                                class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="{{route("request.make",$member->slug)}}"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
@@ -189,8 +198,7 @@
                                                                 class="fa fa-eye"></i></a></li>
                                                     <li><a href="{{route("product",$member->slug)}}"><i
                                                                 class="fa fa-heart"></i></a></li>
-                                                    <li><a href="{{route("product",$member->slug)}}"><i
-                                                                class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="{{route("request.make",$member->slug)}}"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
@@ -235,7 +243,7 @@
                                                 <ul>
                                                     {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-eye"></i></a></li>--}}
                                                     {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-heart"></i></a></li>--}}
-                                                    {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-shopping-cart"></i></a></li>--}}
+                                                                                                        <li><a href="{{route("request.make",$member->slug)}}"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
