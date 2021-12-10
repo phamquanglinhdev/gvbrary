@@ -162,7 +162,7 @@
                                             <div class="comment-text w-100">
                                                 <h5><a class="text-dark"
                                                        href="{{route("user.profile",$comment->User()->first()->email)}}">{{$comment->User()->first()->name}}
-                                                        Linh</a></h5>
+                                                        </a></h5>
                                                 <div class="comment-footer"><span
                                                         class="date">{{$comment->updated_at}}</span> <span
                                                         class="label label-info">{{$commentRole[$comment->User()->first()->role]}}</span>
