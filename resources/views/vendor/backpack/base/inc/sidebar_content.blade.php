@@ -7,3 +7,6 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('order') }}'><i class='nav-icon la la-question'></i> Orders</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('request') }}'><i class='nav-icon la la-question'></i> Requests</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('notification') }}'><i class='nav-icon la la-question'></i> Notifications</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('verification') }}'><i class='nav-icon la la-question'></i> Verifications</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('history') }}'><i class='nav-icon la la-question'></i> Histories</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('comment') }}'><i class='nav-icon la la-question'></i> Comments</a></li>

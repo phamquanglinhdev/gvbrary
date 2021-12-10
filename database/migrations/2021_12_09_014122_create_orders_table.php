@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string("address");
             $table->string("phone");
             $table->string("note");
+            $table->integer("status")->default(0);
             $table->string("payment_method");
             $table->foreign("customer_id")->references("id")->on("users");
             $table->timestamps();

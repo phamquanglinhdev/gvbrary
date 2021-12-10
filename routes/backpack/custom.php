@@ -22,4 +22,7 @@ Route::group([
     Route::crud('order', 'OrderCrudController');
     Route::crud('request', 'RequestCrudController');
     Route::crud('notification', 'NotificationCrudController');
+    Route::crud('verification', 'VerificationCrudController');
+    Route::crud('history', 'HistoryCrudController');
+    Route::crud('comment', 'CommentCrudController');
 }); // this should be the absolute last line of this file

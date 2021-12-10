@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("product_id");
             $table->unsignedBigInteger("user_id");
-            $table->integer("type")->default(0);
-            $table->string("title")->default(0);
-            $table->string("message");
+            $table->integer("rating");
+            $table->longText("comment");
             $table->integer("status")->default(0);
+            $table->foreign("product_id")->references("id")->on("products");
             $table->foreign("user_id")->references("id")->on("users");
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('comments');
     }
 }

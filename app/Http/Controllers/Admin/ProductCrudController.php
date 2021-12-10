@@ -46,7 +46,7 @@ class ProductCrudController extends CrudController
         }
         CRUD::column('name')->label("Tên sách");
         CRUD::column('price')->label("Giá thuê");
-        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Chưa được mượn", "Đã mượn"]);
+        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Còn sách", "Hết sách"]);
         CRUD::column('main_thumbnail')->type("image")->label("Ảnh");
         CRUD::addColumn([
             'name' => 'category_id',
@@ -86,7 +86,7 @@ class ProductCrudController extends CrudController
         CRUD::field('name')->label("Tên sách");
         CRUD::field('price')->label("Giá cho thuê")->attributes(["placeholder"=>"Để trống nếu miễn phí cho thuê"]);
         CRUD::field('description')->type("ckeditor")->label("Giới thiệu về sách");
-        CRUD::field('status')->label("Trạng thái")->type("select_from_array")->options(["Chưa được mượn", "Đã mượn"]);
+        CRUD::field('status')->label("Trạng thái")->type("select_from_array")->options(["Còn sách", "Hết sách"]);
         CRUD::addField([
             'name' => 'first_thumbnail',
             'type' => 'image',

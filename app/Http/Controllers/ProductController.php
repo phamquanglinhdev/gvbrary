@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -35,5 +36,15 @@ class ProductController extends Controller
             return view("errors.404");
         }
 
+    }
+    public function requestComment(Request $request){
+        $newComment = [
+            'user_id'=>backpack_user()->id,
+            'product_id'=>$request->product_id,
+            'rating'=>$request->rating,
+            'comment'=>$request->comment,
+        ];
+        Comment::create($newComment);
+        return redirect()->back()->with("success","Đánh giá của bạn đã được gửi xét duyệt thành công");
     }
 }

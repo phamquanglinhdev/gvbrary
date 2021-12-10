@@ -7,8 +7,15 @@ use Illuminate\Http\Request;
 
 class RequestController extends Controller
 {
-    public function makeRequest($slug){
-        $product =  Product::where("slug","=",$slug)->first();
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function makeRequest(Request $data){
+
+        $exp =  date_create($data->expiry);
+        $product =  Product::where("slug","=",$data->slug)->first();
         if(isset($product) && $product->status==0){
             $checks = \App\Models\Request::where("user_id","=",backpack_user()->id)->get();
             foreach ($checks as $check){
@@ -16,12 +23,13 @@ class RequestController extends Controller
                     return redirect()->back()->with("fail","Bạn đã gửi yêu cầu một lần !");
                 }
             }
+
             $request = [
                 'product_id'=>$product->id,
                 'owner_id'=>$product->Published()->first()->id,
                 'user_id'=>backpack_user()->id,
                 'order_id'=>null,
-                'expiry'=>date("Y-m-d"),
+                'expiry'=>date_format($exp,"Y/m/d"),
                 'status'=>1, // đang chờ
             ];
             \App\Models\Request::create($request);

@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
-class Product extends Model
+class Verification extends Model
 {
     use CrudTrait;
 
@@ -16,7 +15,7 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'products';
+    protected $table = 'verifications';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -29,26 +28,21 @@ class Product extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function setSlugAttribute(){
+    public function acceptRequest(){
+        return "<a class='btn btn-sm btn-link'  href='".route("user.verification.accept",$this->id)."'><i class ='nav-icon las la-check'></i> Đồng ý</a>";
 
-        $this->attributes['slug'] = Str::slug($this->name,"-").".aspx";
     }
-    public function viewOnWeb(){
-        return "<a class='btn btn-sm btn-link' target='_blank' href='".route("product",$this->slug)."'><i class ='la la-eye'></i>Preview</a>";
+    public function cancelRequest(){
+        return "<a class='btn btn-sm btn-link' href='".route("user.verification.cancel",$this->id)."'><i class ='nav-icon las la-ban'></i>Từ chối</a>";
+
     }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-        public function Category(){
-            return $this->belongsTo(Category::class,"category_id","id");
-        }
-        public function Published(){
-            return $this->belongsTo(User::class,"published_id","id");
-        }
-        public function Comment(){
-            return $this->hasMany(Comment::class,"product_id","id");
+        public function User(){
+            return $this->belongsTo(User::class,"user_id","id");
         }
     /*
     |--------------------------------------------------------------------------

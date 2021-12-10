@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationsTable extends Migration
+class CreateHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->integer("type")->default(0);
-            $table->string("title")->default(0);
-            $table->string("message");
-            $table->integer("status")->default(0);
+            $table->unsignedBigInteger("product_id");
+            $table->integer("status")->default("1");
+            $table->date("started");
+            $table->date("expiry");
             $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("product_id")->references("id")->on("products");
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('histories');
     }
 }

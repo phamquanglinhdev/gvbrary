@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-content">
-                        <h2>Giỏ sách của bạn</h2>
+                        <h2>Giỏ hàng của bạn</h2>
                         <span></span>
                     </div>
                 </div>

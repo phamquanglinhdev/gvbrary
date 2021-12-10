@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\OrderRequest;
-use App\Models\Request;
+use App\Http\Requests\CommentRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class OrderCrudController
+ * Class CommentCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class OrderCrudController extends CrudController
+class CommentCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -27,15 +26,11 @@ class OrderCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Order::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/order');
-        CRUD::setEntityNameStrings('order', 'orders');
+        CRUD::setModel(\App\Models\Comment::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/comment');
+        CRUD::setEntityNameStrings('Bình luận chờ xác thực', 'Bình luận chờ xác thực');
         $this->crud->denyAccess("create");
         $this->crud->denyAccess("show");
-        $this->crud->denyAccess("update");
-        $this->crud->denyAccess("delete");
-        $this->crud->enableDetailsRow();
-        $this->crud->enableExportButtons();
     }
 
     /**
@@ -46,17 +41,33 @@ class OrderCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->addClause("where","status","=",0);
         CRUD::addColumn([
-            'name' => 'customer_id',
+            'name' => 'user_id',
+            'label'=>'Người bình luận',
             'type' => 'select',
-            'entity'=>'Customer',
+            'entity'=>'User',
             'model'=>'App\Models\User',
-            'attribute'=>'name',
+            'attribute'=>'name'
         ]);
-        CRUD::column('address')->label("Địa chỉ");
-        CRUD::column('phone')->label("Số điện thoại");
-        CRUD::column('payment_method')->label("Phương thức thanh toán")->type("select_from_array")->options(["GVB Coin","Trả khi nhận hàng"]);
-        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Đã xác nhận","Đã giao","Đã hủy"]);
+        CRUD::addColumn([
+            'name' => 'product_id',
+            'label'=>'Sản phẩm',
+            'type' => 'select',
+            'entity'=>'Product',
+            'model'=>'App\Models\Product',
+            'attribute'=>'name'
+        ]);
+        CRUD::addColumn([
+            'name' => 'rating',
+            'label'=>'Số sao đánh giá',
+            'type' => 'text',
+        ]);
+        CRUD::addColumn([
+            'name' => 'comment',
+            'label'=>'Nội dung',
+            'type' => 'text',
+        ]);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -73,15 +84,9 @@ class OrderCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(OrderRequest::class);
+        CRUD::setValidation(CommentRequest::class);
+        CRUD::addField(['name' => 'status', 'label'=>"Xác nhận",'type' => 'select_from_array','options'=>["Chưa đồng ý","Đồng ý hiển thị"]]);
 
-        CRUD::field('id');
-        CRUD::field('customer_id');
-        CRUD::field('address');
-        CRUD::field('phone');
-        CRUD::field('note');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -99,10 +104,5 @@ class OrderCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-    public function showDetailsRow($id)
-    {
-        $items = Request::where("order_id","=",$id)->get();
-        return view("client.detail",["items"=>$items]);
     }
 }

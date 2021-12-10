@@ -50,15 +50,24 @@ class CartController extends Controller
         ];
         $order=Order::create($orderData);
         foreach ($items as $item){
-            \App\Models\Request::find($item->id)->update(["order_id"=>$order->id]);
-            $publisher = User::find($item->owner_id);
-            $publisher->update(['coin'=>$publisher->coin + 0.75*($item->Product()->first()->price)]);
-            $nof = [
-                'user_id'=>$publisher->id,
-                'title'=>"Nhận tiền cho thuê truyện",
-                'message'=>"Bạn nhận được ".number_format( 0.75*($item->Product()->first()->price))."đ từ việc cho thuê cuốn sách '".$item->Product()->first()->name."'",
-            ];
-            Notification::create($nof);
+            if($item->status ==0){
+                \App\Models\Request::find($item->id)->update(["order_id"=>$order->id]);
+                $publisher = User::find($item->owner_id);
+                $publisher->update(['coin'=>$publisher->coin + 0.75*($item->Product()->first()->price)]);
+                $nof = [
+                    'user_id'=>$publisher->id,
+                    'title'=>"Nhận tiền cho thuê truyện",
+                    'message'=>"Bạn nhận được ".number_format( 0.75*($item->Product()->first()->price))."đ từ việc cho thuê cuốn sách '".$item->Product()->first()->name."'",
+                ];
+
+                Notification::create($nof);
+                $nof = [
+                    'user_id'=>backpack_user()->id,
+                    'title'=>'Thuê thành công',
+                    'message'=>'Thuê cuốn '.$item->Product()->first()->name." thành công, sách sẽ được chuyển cho bạn trong thời gian sớm nhất",
+                ];
+                Notification::create($nof);
+            }
         }
     }
 }

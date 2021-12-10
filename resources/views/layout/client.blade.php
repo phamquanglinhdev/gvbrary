@@ -48,15 +48,15 @@
             <div class="col-12">
                 <nav class="main-nav row">
                     <!-- ***** Logo Start ***** -->
-                    <a href="{{route("index")}}" class="d-lg-block d-none logo col-md-3 col-12">
+                    <a href="{{route("index")}}" class="d-lg-block d-none logo col-md-2 col-12">
                         <img src="{{asset("assets/images/logo.png")}}" class="w-100">
                     </a>
-                    <a href="{{route("index")}}" class="d-lg-none d-block logo col-md-3 col-12">
+                    <a href="{{route("index")}}" class="d-lg-none d-block logo col-md-2 col-12">
                         <img src="{{asset("assets/images/logo.png")}}" class="w-50">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <ul class="nav col-md-9 col-12">
+                    <ul class="nav col-md-10 col-12">
                         <li class="scroll-to-section"><a href="{{route("index")}}" class="active">Trang chủ</a></li>
                         <li class="submenu">
                             <a href="javascript:;">Danh sách</a>
@@ -74,17 +74,33 @@
                             <ul>
                                 <li><a href="#">Thuê sách</a></li>
                                 <li><a href="#">Cho thuê sách</a></li>
-                                <li><a href="#">Mượn sách miễn phí</a></li>
-                                <li><a href="#">Xác mình học sinh GVB</a></li>
+                                <li><a href="#">Sách miễn phí <span class="badge badge-success">Available</span></a>
+                                </li>
+                                @if(backpack_auth()->check())
+                                    @if(backpack_user()->role==3)
+                                        <li><a href="{{route("user.verification")}}">Xác mình học sinh GVB</a></li>
+                                    @endif
+                                @endif
                             </ul>
                         </li>
                         @if(backpack_auth()->check())
                             <li class="submenu">
-                                <a href="javascript:;"><i class="fas fa-user"></i> {{backpack_user()->name}}</a>
+                                <a href="javascript:;"><i class="fas fa-user">
+                                    </i> {{backpack_user()->name}}
+                                    @if(backpack_user()->role==2)
+                                        <span class="badge badge-warning">Member</span>
+                                    @endif
+                                    @if(backpack_user()->role==1)
+                                        <span class="badge badge-primary">Publisher</span>
+                                    @endif
+                                    @if(backpack_user()->role==0)
+                                        <span class="badge badge-success">Admin</span>
+                                    @endif
+                                </a>
                                 <ul>
                                     <li><a href="{{route("user.profile")}}">Thông tin tài khoản</a></li>
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
-                                    <li><a href="#">Sách đã mượn (thuê)</a></li>
+                                    <li><a href="{{route("user.history")}}">Sách đã mượn (thuê)</a></li>
                                     <li><a href="{{route("backpack.auth.logout")}}">Đăng xuất</a></li>
                                     @if(backpack_user()->role<=1)
                                         <li><a href="#">Quản lý thanh toán</a></li>
@@ -97,9 +113,32 @@
                             </li>
                             <li class=""><a href="#"><i
                                         class="fas fa-coins"></i> {{number_format(backpack_user()->coin)}} đ</a></li>
-                            <li class=""><a href="{{route("cart")}}"><i class="fas fa-cart-plus"></i>
-                                    <div class="badge badge-danger">0</div>
+                            <li class="">
+                                <a href="{{route("cart")}}"><i class="fas fa-cart-plus"></i>
+                                    <div class="badge badge-danger">
+                                        @php
+                                            $count =  \App\Models\Request::where("user_id","=",backpack_user()->id);
+                                            $count = $count->where("status","=",0);
+                                            $count =  $count->where("order_id","=",null)->count();
+                                        @endphp
+                                        {{$count}}
+                                    </div>
                                 </a></li>
+                            <li>
+                                <a id="pop-notification" data-toggle="modal" data-target="#popNotification"><i
+                                        class="fas fa-bell"></i>
+                                    @php
+                                        $notifications =  \App\Models\Notification::where("user_id","=",backpack_user()->id);
+                                        $countNof =$notifications->where("status","=",0)->count();
+                                    @endphp
+                                    @if($countNof >0)
+                                        <div id="count-notification" class="badge badge-danger">
+
+                                            {{$countNof}}
+                                        </div>
+                                    @endif
+                                </a>
+                            </li>
                         @else
                             <li><a href="{{route("backpack.auth.login")}}">Đăng nhập</a></li>
                             <li><a href="{{route("backpack.auth.register")}}">Đăng ký</a></li>
@@ -117,6 +156,46 @@
 <!-- ***** Header Area End ***** -->
 @yield("banner")
 @yield("content")
+<!-- Modal -->
+@if(backpack_auth()->check())
+    <div class="modal fade" id="popNotification" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @php
+                        $notifications =  \App\Models\Notification::where("user_id","=",backpack_user()->id)->orderBy("updated_at","DESC")->limit(5)->get();
+                    @endphp
+                    @if(isset($notifications))
+                        @foreach($notifications as $notification)
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item list-group-item-action flex-column align-items-start {{$notification->status==0?"bg-light":""}} ">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1 {{$notification->status==0?"font-weight-bold text-success":""}}">{{$notification->title}}</h5>
+                                        <small>{{$notification->updated_at}}</small>
+                                    </div>
+                                    <p class="mb-1">{{$notification->message}}.</p>
+                                </a>
+                            </div>
+                            <hr>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <a type="button" href="{{route("user.notification")}}" class="w-100 text-center text-muted">Xem tất
+                        cả</a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 <!-- ***** Footer Start ***** -->
 <footer>
     <div class="container">
@@ -124,7 +203,8 @@
             <div class="col-lg-3">
                 <div class="first-item">
                     <div class="logo">
-                        <img src="{{asset("assets/images/white-logo.png")}}" alt="hexashop ecommerce templatemo" class="w-75">
+                        <img src="{{asset("assets/images/white-logo.png")}}" alt="hexashop ecommerce templatemo"
+                             class="w-75">
                     </div>
                     <ul>
                         <li><a href="#">Gia Lập, Gia Viễn, Ninh Bình</a></li>
@@ -148,10 +228,10 @@
                     @foreach($categories as $category)
                         <li><a href="{{route("products",$category->slug)}}">{{$category->name}}</a></li>
                     @endforeach
-{{--                    <li><a href="#">Homepage</a></li>--}}
-{{--                    <li><a href="#">About Us</a></li>--}}
-{{--                    <li><a href="#">Help</a></li>--}}
-{{--                    <li><a href="#">Contact Us</a></li>--}}
+                    {{--                    <li><a href="#">Homepage</a></li>--}}
+                    {{--                    <li><a href="#">About Us</a></li>--}}
+                    {{--                    <li><a href="#">Help</a></li>--}}
+                    {{--                    <li><a href="#">Contact Us</a></li>--}}
                 </ul>
             </div>
             <div class="col-lg-3">
@@ -217,6 +297,18 @@
                 $("#portfolio").fadeTo(50, 1);
             }, 500);
 
+        });
+    });
+
+    $("#pop-notification").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '{{route("user.notification.read")}}',
+            success: function (data) {
+                $("#count-notification").hide();
+            },
+            error: function () {
+            }
         });
     });
 

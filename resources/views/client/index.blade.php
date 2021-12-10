@@ -151,7 +151,9 @@
                                                                 class="fa fa-eye"></i></a></li>
                                                     <li><a href="{{route("product",$member->slug)}}"><i
                                                                 class="fa fa-heart"></i></a></li>
-                                                    <li><a href="{{route("request.make",$member->slug)}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a data-toggle="modal" data-target="#member-{{$member->id}}"><i
+                                                                class="fa fa-shopping-cart"></i></a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
@@ -163,6 +165,9 @@
                                     </div>
                                 @endforeach
                             @endif
+                            {{--                            @foreach($members as $member)--}}
+
+                            {{--                            @endforeach--}}
                         </div>
                     </div>
                 </div>
@@ -198,7 +203,8 @@
                                                                 class="fa fa-eye"></i></a></li>
                                                     <li><a href="{{route("product",$member->slug)}}"><i
                                                                 class="fa fa-heart"></i></a></li>
-                                                    <li><a href="{{route("request.make",$member->slug)}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a data-toggle="modal" data-target="#library-{{$member->id}}"><i
+                                                                class="fa fa-shopping-cart"></i></a>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
@@ -241,9 +247,12 @@
                                         <div class="thumb">
                                             <div class="hover-content">
                                                 <ul>
-                                                    {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-eye"></i></a></li>--}}
-                                                    {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-heart"></i></a></li>--}}
-                                                                                                        <li><a href="{{route("request.make",$member->slug)}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="{{route("product",$member->slug)}}"><i
+                                                                class="fa fa-eye"></i></a></li>
+                                                    <li><a href="{{route("product",$member->slug)}}"><i
+                                                                class="fa fa-heart"></i></a></li>
+                                                    <li><a data-toggle="modal" data-target="#free-{{$member->id}}"><i
+                                                                class="fa fa-shopping-cart"></i></a>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
@@ -261,9 +270,12 @@
                                         <div class="thumb">
                                             <div class="hover-content">
                                                 <ul>
-                                                    {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-eye"></i></a></li>--}}
-                                                    {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-heart"></i></a></li>--}}
-                                                    {{--                                                    <li><a href="{{route("product")}}"><i class="fa fa-shopping-cart"></i></a></li>--}}
+                                                    <li><a href="{{route("product",$member->slug)}}"><i
+                                                                class="fa fa-eye"></i></a></li>
+                                                    <li><a href="{{route("product",$member->slug)}}"><i
+                                                                class="fa fa-heart"></i></a></li>
+                                                    <li><a data-toggle="modal" data-target="#free-{{$member->id}}"><i
+                                                                class="fa fa-shopping-cart"></i></a>
                                                 </ul>
                                             </div>
                                             <img src="{{$member->main_thumbnail}}" alt="">
@@ -284,61 +296,61 @@
     <!-- ***** Kids Area Ends ***** -->
 
     <!-- ***** Explore Area Starts ***** -->
-{{--    <section class="section" id="explore">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <div class="left-content">--}}
-{{--                        <h2>Explore Our Products</h2>--}}
-{{--                        <span>You are allowed to use this HexaShop HTML CSS template. You can feel free to modify or edit this layout. You can convert this template as any kind of ecommerce CMS theme as you wish.</span>--}}
-{{--                        <div class="quote">--}}
-{{--                            <i class="fa fa-quote-left"></i>--}}
-{{--                            <p>You are not allowed to redistribute this template ZIP file on any other website.</p>--}}
-{{--                        </div>--}}
-{{--                        <p>There are 5 pages included in this HexaShop Template and we are providing it to you for--}}
-{{--                            absolutely free of charge at our TemplateMo website. There are web development costs for--}}
-{{--                            us.</p>--}}
-{{--                        <p>If this template is beneficial for your website or business, please kindly <a rel="nofollow"--}}
-{{--                                                                                                         href="https://paypal.me/templatemo"--}}
-{{--                                                                                                         target="_blank">support--}}
-{{--                                us</a> a little via PayPal. Please also tell your friends about our great website. Thank--}}
-{{--                            you.</p>--}}
-{{--                        <div class="main-border-button">--}}
-{{--                            <a href="products.html">Discover More</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <div class="right-content">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-lg-6">--}}
-{{--                                <div class="leather">--}}
-{{--                                    <h4>Leather Bags</h4>--}}
-{{--                                    <span>Latest Collection</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-6">--}}
-{{--                                <div class="first-image">--}}
-{{--                                    <img src="assets/images/explore-image-01.jpg" alt="">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-6">--}}
-{{--                                <div class="second-image">--}}
-{{--                                    <img src="assets/images/explore-image-02.jpg" alt="">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-6">--}}
-{{--                                <div class="types">--}}
-{{--                                    <h4>Different Types</h4>--}}
-{{--                                    <span>Over 304 Products</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    {{--    <section class="section" id="explore">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="row">--}}
+    {{--                <div class="col-lg-6">--}}
+    {{--                    <div class="left-content">--}}
+    {{--                        <h2>Explore Our Products</h2>--}}
+    {{--                        <span>You are allowed to use this HexaShop HTML CSS template. You can feel free to modify or edit this layout. You can convert this template as any kind of ecommerce CMS theme as you wish.</span>--}}
+    {{--                        <div class="quote">--}}
+    {{--                            <i class="fa fa-quote-left"></i>--}}
+    {{--                            <p>You are not allowed to redistribute this template ZIP file on any other website.</p>--}}
+    {{--                        </div>--}}
+    {{--                        <p>There are 5 pages included in this HexaShop Template and we are providing it to you for--}}
+    {{--                            absolutely free of charge at our TemplateMo website. There are web development costs for--}}
+    {{--                            us.</p>--}}
+    {{--                        <p>If this template is beneficial for your website or business, please kindly <a rel="nofollow"--}}
+    {{--                                                                                                         href="https://paypal.me/templatemo"--}}
+    {{--                                                                                                         target="_blank">support--}}
+    {{--                                us</a> a little via PayPal. Please also tell your friends about our great website. Thank--}}
+    {{--                            you.</p>--}}
+    {{--                        <div class="main-border-button">--}}
+    {{--                            <a href="products.html">Discover More</a>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <div class="col-lg-6">--}}
+    {{--                    <div class="right-content">--}}
+    {{--                        <div class="row">--}}
+    {{--                            <div class="col-lg-6">--}}
+    {{--                                <div class="leather">--}}
+    {{--                                    <h4>Leather Bags</h4>--}}
+    {{--                                    <span>Latest Collection</span>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                            <div class="col-lg-6">--}}
+    {{--                                <div class="first-image">--}}
+    {{--                                    <img src="assets/images/explore-image-01.jpg" alt="">--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                            <div class="col-lg-6">--}}
+    {{--                                <div class="second-image">--}}
+    {{--                                    <img src="assets/images/explore-image-02.jpg" alt="">--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                            <div class="col-lg-6">--}}
+    {{--                                <div class="types">--}}
+    {{--                                    <h4>Different Types</h4>--}}
+    {{--                                    <span>Over 304 Products</span>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
     <!-- ***** Explore Area Ends ***** -->
 
     <!-- ***** Social Area Starts ***** -->
@@ -348,7 +360,7 @@
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <h2>Review sách của Gvbrary</h2>
-{{--                        <span>Details to details is what makes Hexashop different from the other themes.</span>--}}
+                        {{--                        <span>Details to details is what makes Hexashop different from the other themes.</span>--}}
                     </div>
                 </div>
             </div>
@@ -428,5 +440,126 @@
             </div>
         </div>
     </div>
+    <!-- Modal Zone -->
+    <!-- Member Modal -->
+    @if(isset($members))
+        @foreach($members as $member)
+            <div class="modal fade" id="member-{{$member->id}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">{{$member->name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Người đăng :
+                            <a class="text-success"
+                               href="{{route("user.profile",$member->Published()->first()->email)}}">
+                                {{$member->Published()->first()->name}}
+                            </a>
+                            Giá thuê : {{number_format($member->price)}} đ
+                            <form method="POST" action="{{route("request.make")}}">
+                                @csrf
+                                <input type="hidden" name="slug" value="{{$member->slug}}"/>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Hạn mượn mong muốn</label>
+                                    <input type="date" class="form-control" name="expiry" id="exampleInputPassword1"
+                                           required>
+                                    <small class="text-muted">Định dạng quốc tế : Tháng - Ngày -Năm</small>
+                                </div>
+                                <button class="btn btn-success">Gửi yêu cầu</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
+    <!-- Library Modal -->
+    @if(isset($libraries))
+        @foreach($libraries as $member)
+            <div class="modal fade" id="library-{{$member->id}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">{{$member->name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Người đăng :
+                            <a class="text-success"
+                               href="{{route("user.profile",$member->Published()->first()->email)}}">
+                                {{$member->Published()->first()->name}}
+                            </a>
+                            Giá thuê : {{number_format($member->price)}} đ
+                            <form method="POST" action="{{route("request.make")}}">
+                                @csrf
+                                <input type="hidden" name="slug" value="{{$member->slug}}"/>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Hạn mượn mong muốn</label>
+                                    <input type="date" class="form-control" name="expiry" id="exampleInputPassword1"
+                                           required>
+                                    <small class="text-muted">Định dạng quốc tế : Tháng - Ngày -Năm</small>
+                                </div>
+                                <button class="btn btn-success">Gửi yêu cầu</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
+    <!-- Feee Modal -->
+    @if(isset($frees))
+        @foreach($frees as $member)
+            <div class="modal fade" id="free-{{$member->id}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">{{$member->name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Người đăng :
+                            <a class="text-success"
+                               href="{{route("user.profile",$member->Published()->first()->email)}}">
+                                {{$member->Published()->first()->name}}
+                            </a>
+                            Giá thuê : {{number_format($member->price)}} đ
+                            <form method="POST" action="{{route("request.make")}}">
+                                @csrf
+                                <input type="hidden" name="slug" value="{{$member->slug}}"/>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Hạn mượn mong muốn</label>
+                                    <input type="date" class="form-control" name="expiry" id="exampleInputPassword1"
+                                           required>
+                                    <small class="text-muted">Định dạng quốc tế : Tháng - Ngày -Năm</small>
+                                </div>
+                                <button class="btn btn-success">Gửi yêu cầu</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
     <!-- ***** Subscribe Area Ends ***** -->
 @endsection

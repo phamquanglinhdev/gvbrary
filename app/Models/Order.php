@@ -34,7 +34,9 @@ class Order extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+        public function Customer(){
+            return $this->belongsTo(User::class,"customer_id","id");
+        }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

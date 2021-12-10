@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\OrderRequest;
-use App\Models\Request;
+use App\Http\Requests\VerificationRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Prologue\Alerts\Facades\Alert;
 
 /**
- * Class OrderCrudController
+ * Class VerificationCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class OrderCrudController extends CrudController
+class VerificationCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -27,15 +27,21 @@ class OrderCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Order::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/order');
-        CRUD::setEntityNameStrings('order', 'orders');
-        $this->crud->denyAccess("create");
+        CRUD::setModel(\App\Models\Verification::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/verification');
+        CRUD::setEntityNameStrings('Xác minh', 'Xác minh');
         $this->crud->denyAccess("show");
         $this->crud->denyAccess("update");
+        $this->crud->denyAccess("create");
         $this->crud->denyAccess("delete");
-        $this->crud->enableDetailsRow();
-        $this->crud->enableExportButtons();
+        $this->crud->addButtonFromModelFunction("line","acceptRequest","acceptRequest","line");
+        $this->crud->addButtonFromModelFunction("line","cancelRequest","cancelRequest","line");
+        if(session("success")){
+            Alert::success("Đã đồng ý");
+        }
+        if(session("fail")){
+            Alert::error("Đã từ chối");
+        }
     }
 
     /**
@@ -47,16 +53,16 @@ class OrderCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
-            'name' => 'customer_id',
+            'name' => 'user_id',
             'type' => 'select',
-            'entity'=>'Customer',
-            'model'=>'App\Models\User',
+            'entity'=>"User",
+            'model'=>"App\Models\User",
             'attribute'=>'name',
         ]);
-        CRUD::column('address')->label("Địa chỉ");
-        CRUD::column('phone')->label("Số điện thoại");
-        CRUD::column('payment_method')->label("Phương thức thanh toán")->type("select_from_array")->options(["GVB Coin","Trả khi nhận hàng"]);
-        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Đã xác nhận","Đã giao","Đã hủy"]);
+        CRUD::column('id_card')->label("Số id xác minh");
+        CRUD::column('card_image')->type("image")->label("Ảnh");
+        CRUD::column('grade')->label("Lớp học");
+
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -73,13 +79,12 @@ class OrderCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(OrderRequest::class);
+        CRUD::setValidation(VerificationRequest::class);
 
-        CRUD::field('id');
-        CRUD::field('customer_id');
-        CRUD::field('address');
-        CRUD::field('phone');
-        CRUD::field('note');
+        CRUD::field('user_id');
+        CRUD::field('id_card');
+        CRUD::field('card_image');
+        CRUD::field('grade');
         CRUD::field('created_at');
         CRUD::field('updated_at');
 
@@ -99,10 +104,5 @@ class OrderCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-    public function showDetailsRow($id)
-    {
-        $items = Request::where("order_id","=",$id)->get();
-        return view("client.detail",["items"=>$items]);
     }
 }
