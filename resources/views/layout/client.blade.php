@@ -80,7 +80,7 @@
                     <a href="{{route("index")}}" class="d-lg-block d-none logo col-md-2 col-12">
                         <img src="{{asset("assets/images/logo.png")}}" class="w-100">
                     </a>
-                    <a href="{{route("index")}}" class="d-lg-none d-block logo col-md-2 col-12">
+                    <a href="{{route("index")}}" class="d-lg-none d-flex align-items-center logo col-md-2 col-12">
                         <img src="{{asset("assets/images/logo.png")}}" class="w-50">
                     </a>
                     <!-- ***** Logo End ***** -->

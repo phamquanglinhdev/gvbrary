@@ -18,7 +18,8 @@
                     <div class="left-content">
                         <div class="thumb">
                             <div class="inner-content">
-                                <h4>Thư viện GVB</h4>
+                                <h4 class="d-sm-block d-none">Thư viện GVB</h4>
+                                <h2 class="text-white font-weight-bold d-sm-none d-block">Thư viện GVB</h2>
                                 <span>Tìm sách , thuê sách , mượn sách ngay tại đây</span>
                                 <div class="main-border-button">
                                     <a href="{{route("products")}}">Khám phá ngay</a>
