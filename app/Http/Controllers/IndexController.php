@@ -12,7 +12,7 @@ class IndexController extends Controller
         $members =  Product::where("category_id","=",2)->get();
         $libraries =  Product::where("category_id","=",1)->get();
         $frees =  Product::where("category_id","=",3)->get();
-        $frees_2 =  Product::where("price","=",null)->get();
+        $frees_2 =  Product::where("price","=",null,"or","price","=",0)->get();
         $reviews = Review::limit(6)->get();
         //return $members;
         return view("client.index",['libraries'=>$libraries,'members'=>$members,"frees"=>$frees,"frees_2"=>$frees_2,"reviews"=>$reviews]);
