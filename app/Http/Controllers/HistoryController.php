@@ -11,4 +11,9 @@ class HistoryController extends Controller
         $histories = History::where("user_id","=",backpack_user()->id)->get();
         return view("client.chest",["histories"=>$histories]);
     }
+    public function returned($id){
+        if(History::find($id)->update(['status'=>0])){
+            return redirect()->back()->with("success","Thay đổi trạng thái thành công");
+        }
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\VerificationRequest;
+use App\Models\Verification;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Prologue\Alerts\Facades\Alert;
@@ -36,6 +37,7 @@ class VerificationCrudController extends CrudController
         $this->crud->denyAccess("delete");
         $this->crud->addButtonFromModelFunction("line","acceptRequest","acceptRequest","line");
         $this->crud->addButtonFromModelFunction("line","cancelRequest","cancelRequest","line");
+        $this->crud->enableDetailsRow();
         if(session("success")){
             Alert::success("Đã đồng ý");
         }
@@ -104,5 +106,10 @@ class VerificationCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+    public function showDetailsRow($id)
+    {
+
+        return view("client.showid",["image"=>Verification::find($id)->card_image]);
     }
 }

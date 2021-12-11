@@ -44,17 +44,18 @@
 
 <!-- Your SDK code -->
 <script>
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
         FB.init({
-            xfbml            : true,
-            version          : 'v12.0'
+            xfbml: true,
+            version: 'v12.0'
         });
     };
 
-    (function(d, s, id) {
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
+        js = d.createElement(s);
+        js.id = id;
         js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -172,6 +173,10 @@
                             <li><a href="{{route("backpack.auth.login")}}">Đăng nhập</a></li>
                             <li><a href="{{route("backpack.auth.register")}}">Đăng ký</a></li>
                         @endif
+                        <li>
+                            <a id="pop-notification" data-toggle="modal" data-target="#search"><i
+                                    class="fas fa-search"></i></a>
+                        </li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -225,6 +230,27 @@
         </div>
     </div>
 @endif
+
+
+<!-- Modal -->
+<div class="modal fade w-100" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-transparent border-0">
+            <form action="{{route("search")}}" method="POST">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="keyword" placeholder="Tìm theo tên sách , từ khóa ,..."
+                           aria-label="Recipient's username" aria-describedby="basic-addon2" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- ***** Footer Start ***** -->
 <footer>
     <div class="container">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\HistoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Prologue\Alerts\Facades\Alert;
 
 /**
  * Class HistoryCrudController
@@ -33,7 +34,10 @@ class HistoryCrudController extends CrudController
         $this->crud->denyAccess("show");
         $this->crud->denyAccess("delete");
         $this->crud->denyAccess("update");
-
+        $this->crud->addButtonFromModelFunction("line","Returned","Returned","line");
+        if(session("success")){
+            Alert::success(session("success"));
+        }
     }
 
     /**
@@ -44,6 +48,7 @@ class HistoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('id')->label("Mã log");
         CRUD::addColumn([
             'name' => 'user_id',
             'type' => 'select',

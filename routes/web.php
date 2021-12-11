@@ -3,10 +3,13 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
@@ -39,5 +42,8 @@ Route::get("/request/cancel/{id}",[RequestController::class,"cancelRequest","id"
 Route::get("/user/profile/{email?}",[UserController::class,"index"])->where(["email"])->name("user.profile");
 Route::get("/user/notification",[NotificationController::class,"index"])->name("user.notification");
 Route::get("/user/notification/read",[NotificationController::class,"read"])->name("user.notification.read");
-Route::get("/user/history",[\App\Http\Controllers\HistoryController::class,"index"])->name("user.history");
-Route::post("/comment/store",[\App\Http\Controllers\ProductController::class,"requestComment"])->name("comment.store");
+Route::get("/user/history",[HistoryController::class,"index"])->name("user.history");
+Route::get("/user/history/returned/{id}",[HistoryController::class,"returned","id"])->where(["id"])->name("user.history.returned");
+Route::post("/comment/store",[ProductController::class,"requestComment"])->name("comment.store");
+Route::get("admin/order/change/{id}/{value}",[OrderController::class,"changeStatus","id","value"])->where(["id","value"])->name("order.change");
+Route::any("/search",[SearchController::class,"index","key"])->where(["key"])->name("search");

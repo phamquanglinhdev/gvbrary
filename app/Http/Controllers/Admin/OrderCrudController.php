@@ -36,6 +36,9 @@ class OrderCrudController extends CrudController
         $this->crud->denyAccess("delete");
         $this->crud->enableDetailsRow();
         $this->crud->enableExportButtons();
+        $this->crud->addButtonFromModelFunction("line","AcceptOrder","AcceptOrder","line");
+        $this->crud->addButtonFromModelFunction("line","DoneOrder","DoneOrder","line");
+        $this->crud->addButtonFromModelFunction("line","CancelOrder","CancelOrder","line");
     }
 
     /**
@@ -56,7 +59,7 @@ class OrderCrudController extends CrudController
         CRUD::column('address')->label("Địa chỉ");
         CRUD::column('phone')->label("Số điện thoại");
         CRUD::column('payment_method')->label("Phương thức thanh toán")->type("select_from_array")->options(["GVB Coin","Trả khi nhận hàng"]);
-        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Đã xác nhận","Đã giao","Đã hủy"]);
+        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Đang chờ","Đã xác nhận","Đã giao","Đã hủy"]);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

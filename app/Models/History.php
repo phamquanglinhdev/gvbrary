@@ -48,7 +48,14 @@ class History extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+    public function Returned(){
+        return $this->CreateBtn($this->id,$this->status);
+    }
+    public function CreateBtn($id,$status){
+        if($status==1){
+            return "<a class='btn btn-sm btn-link' href='".route("user.history.returned",['id'=>$id])."'><i class ='las la-undo-alt'></i> Đã trả </a>";
+        }
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
