@@ -14,3 +14,5 @@
         phẩm</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('request') }}'><i class='nav-icon las la-money-check'></i>
         Yêu cầu mượn sách</a></li>
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('coin') }}'><i class='nav-icon la la-question'></i> Coins</a></li>

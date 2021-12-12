@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CoinController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\IndexController;
@@ -47,3 +48,6 @@ Route::get("/user/history/returned/{id}",[HistoryController::class,"returned","i
 Route::post("/comment/store",[ProductController::class,"requestComment"])->name("comment.store");
 Route::get("admin/order/change/{id}/{value}",[OrderController::class,"changeStatus","id","value"])->where(["id","value"])->name("order.change");
 Route::any("/search",[SearchController::class,"index","key"])->where(["key"])->name("search");
+Route::get("/purchase",[CoinController::class,"index"])->where(["key"])->name("purchase");
+Route::post("/purchase/send",[CoinController::class,"store"])->where(["key"])->name("purchase.store");
+Route::get("/coin/accept/{id}",[CoinController::class,"accept","id"])->where(["id"])->name("coin.accept");

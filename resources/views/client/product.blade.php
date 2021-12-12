@@ -91,7 +91,7 @@
                             </div>
                         @else
                             <br>
-                            <div class="text-danger d-block">*Đăng nhập đế mua sản phẩm</div>
+                            <div class="text-danger d-block">*Đăng nhập đế thuê / mượn.</div>
                             <a class="text-white" href="{{route("backpack.auth.login")}}">
                                 <div class="btn btn-outline-secondary d-block w-100">Đăng nhập</div>
                             </a>

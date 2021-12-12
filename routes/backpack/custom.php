@@ -25,4 +25,5 @@ Route::group([
     Route::crud('verification', 'VerificationCrudController');
     Route::crud('history', 'HistoryCrudController');
     Route::crud('comment', 'CommentCrudController');
+    Route::crud('coin', 'CoinCrudController');
 }); // this should be the absolute last line of this file

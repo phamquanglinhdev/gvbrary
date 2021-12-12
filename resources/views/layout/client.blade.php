@@ -104,7 +104,7 @@
                             <ul>
                                 <li><a href="#">Thuê sách</a></li>
                                 <li><a href="#">Cho thuê sách</a></li>
-                                <li><a href="#">Sách miễn phí <span class="badge badge-success">Available</span></a>
+                                <li><a href="{{route("products",'sach-mien-phi.aspx')}}">Sách miễn phí <span class="badge badge-success">Available</span></a>
                                 </li>
                                 @if(backpack_auth()->check())
                                     @if(backpack_user()->role==3)
@@ -131,6 +131,7 @@
                                     <li><a href="{{route("user.profile")}}">Thông tin tài khoản</a></li>
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
                                     <li><a href="{{route("user.history")}}">Sách đã mượn (thuê)</a></li>
+                                    <li><a href="{{route("purchase")}}">Nạp coin GVB</a></li>
                                     <li><a href="{{route("backpack.auth.logout")}}">Đăng xuất</a></li>
                                     @if(backpack_user()->role<=1)
                                         <li><a href="#">Quản lý thanh toán</a></li>
@@ -204,7 +205,7 @@
                 </div>
                 <div class="modal-body">
                     @php
-                        $notifications =  \App\Models\Notification::where("user_id","=",backpack_user()->id)->orderBy("updated_at","DESC")->limit(5)->get();
+                        $notifications =  \App\Models\Notification::where("user_id","=",backpack_user()->id)->orderBy("created_at","DESC")->limit(5)->get()
                     @endphp
                     @if(isset($notifications))
                         @foreach($notifications as $notification)
