@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RequestBook;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -17,4 +19,5 @@ class IndexController extends Controller
         //return $members;
         return view("client.index",['libraries'=>$libraries,'members'=>$members,"frees"=>$frees,"frees_2"=>$frees_2,"reviews"=>$reviews]);
     }
+
 }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\orderSuccess;
+use App\Mail\recivedCoin;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -59,13 +62,15 @@ class CartController extends Controller
                     'title'=>"Nhận tiền cho thuê truyện",
                     'message'=>"Bạn nhận được ".number_format( 0.75*($item->Product()->first()->price))."đ từ việc cho thuê cuốn sách '".$item->Product()->first()->name."'",
                 ];
-
+                Mail::to($publisher->email)->send(new recivedCoin($nof["message"]));
                 Notification::create($nof);
+
                 $nof = [
                     'user_id'=>backpack_user()->id,
                     'title'=>'Thuê thành công',
                     'message'=>'Thuê cuốn '.$item->Product()->first()->name." thành công, sách sẽ được chuyển cho bạn trong thời gian sớm nhất",
                 ];
+                Mail::to(backpack_user()->email)->send(new orderSuccess($nof["message"]));
                 Notification::create($nof);
             }
         }
