@@ -51,7 +51,8 @@ class CoinCrudController extends CrudController
         ]);
         CRUD::column('log')->label("Log")->type("log");
         CRUD::column('value')->label("Mệnh giá")->type("number");
-        CRUD::column('method')->label("Phương thức nạp")->type("select_from_array")->options(["Đang chờ","Đã nạp"]);
+        CRUD::column('method')->label("Phương thức nạp")->type("select_from_array")->options(["ATM","MOMO"]);
+        CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Đang chờ","Đã nạp"]);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
