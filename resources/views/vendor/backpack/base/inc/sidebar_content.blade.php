@@ -16,3 +16,4 @@
         Yêu cầu mượn sách</a></li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('coin') }}'><i class='nav-icon la la-question'></i> Coins</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('post') }}'><i class='nav-icon la la-question'></i> Posts</a></li>

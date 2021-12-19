@@ -8,6 +8,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SearchController;
@@ -51,3 +52,5 @@ Route::any("/search",[SearchController::class,"index","key"])->where(["key"])->n
 Route::get("/purchase",[CoinController::class,"index"])->where(["key"])->name("purchase");
 Route::post("/purchase/send",[CoinController::class,"store"])->where(["key"])->name("purchase.store");
 Route::get("/coin/accept/{id}",[CoinController::class,"accept","id"])->where(["id"])->name("coin.accept");
+Route::get("/posts",[PostController::class,"index"])->name("posts");
+Route::get("/post/{id}",[PostController::class,"show","id"])->where(["id"])->name("post");

@@ -297,61 +297,45 @@
     <!-- ***** Kids Area Ends ***** -->
 
     <!-- ***** Explore Area Starts ***** -->
-    {{--    <section class="section" id="explore">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="row">--}}
-    {{--                <div class="col-lg-6">--}}
-    {{--                    <div class="left-content">--}}
-    {{--                        <h2>Explore Our Products</h2>--}}
-    {{--                        <span>You are allowed to use this HexaShop HTML CSS template. You can feel free to modify or edit this layout. You can convert this template as any kind of ecommerce CMS theme as you wish.</span>--}}
-    {{--                        <div class="quote">--}}
-    {{--                            <i class="fa fa-quote-left"></i>--}}
-    {{--                            <p>You are not allowed to redistribute this template ZIP file on any other website.</p>--}}
-    {{--                        </div>--}}
-    {{--                        <p>There are 5 pages included in this HexaShop Template and we are providing it to you for--}}
-    {{--                            absolutely free of charge at our TemplateMo website. There are web development costs for--}}
-    {{--                            us.</p>--}}
-    {{--                        <p>If this template is beneficial for your website or business, please kindly <a rel="nofollow"--}}
-    {{--                                                                                                         href="https://paypal.me/templatemo"--}}
-    {{--                                                                                                         target="_blank">support--}}
-    {{--                                us</a> a little via PayPal. Please also tell your friends about our great website. Thank--}}
-    {{--                            you.</p>--}}
-    {{--                        <div class="main-border-button">--}}
-    {{--                            <a href="products.html">Discover More</a>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-6">--}}
-    {{--                    <div class="right-content">--}}
-    {{--                        <div class="row">--}}
-    {{--                            <div class="col-lg-6">--}}
-    {{--                                <div class="leather">--}}
-    {{--                                    <h4>Leather Bags</h4>--}}
-    {{--                                    <span>Latest Collection</span>--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="col-lg-6">--}}
-    {{--                                <div class="first-image">--}}
-    {{--                                    <img src="assets/images/explore-image-01.jpg" alt="">--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="col-lg-6">--}}
-    {{--                                <div class="second-image">--}}
-    {{--                                    <img src="assets/images/explore-image-02.jpg" alt="">--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="col-lg-6">--}}
-    {{--                                <div class="types">--}}
-    {{--                                    <h4>Different Types</h4>--}}
-    {{--                                    <span>Over 304 Products</span>--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </section>--}}
+    <section class="section" id="explore">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="left-content">
+                        <h2>Tin tức mới nhất</h2>
+                        @php
+                            $posts = \App\Models\Post::limit(5)->orderBy("created_at","DESC")->get();
+                        @endphp
+                        <div class="container">
+                            @if(isset($posts))
+                                @foreach($posts as $post)
+                                    @if($post->status==1)
+                                        <div class="row mt-5">
+                                            <div class="col-md-3 col-sm-6 col-12" style="max-height: 200px!important;overflow: hidden">
+                                                <a href="{{route("post",$post->id)}}" ><img src="{!! $post->Crawler() !!}" class="w-100" ></a>
+                                            </div>
+                                            <div class="col-md-9 col-md-6 col-12">
+                                                <a href="{{route("post",$post->id)}}" class="text-dark">
+                                                    <div class="h4">{{$post->name}}</div>
+                                                    <div class="font-italic">{{$post->ContentTrim()}}</div>
+                                                    <div>Upload bởi : <a href="{{route("user.profile",$post->User()->first()->email)}}">{{$post->User()->first()->name}}</a></div>
+                                                    <div class="text-muted">{{$post->updated_at}}</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <hr>
+                                <div class="text-center">
+                                    <a href="{{route("posts")}}">Xem thêm</a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- ***** Explore Area Ends ***** -->
 
     <!-- ***** Social Area Starts ***** -->
@@ -525,6 +509,45 @@
     <!-- Feee Modal -->
     @if(isset($frees))
         @foreach($frees as $member)
+            <div class="modal fade" id="free-{{$member->id}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">{{$member->name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Người đăng :
+                            <a class="text-success"
+                               href="{{route("user.profile",$member->Published()->first()->email)}}">
+                                {{$member->Published()->first()->name}}
+                            </a>
+                            Giá thuê : {{number_format($member->price)}} đ
+                            <form method="POST" action="{{route("request.make")}}">
+                                @csrf
+                                <input type="hidden" name="slug" value="{{$member->slug}}"/>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Hạn mượn mong muốn</label>
+                                    <input type="date" class="form-control" name="expiry" id="exampleInputPassword1"
+                                           required>
+                                    <small class="text-muted">Định dạng quốc tế : Tháng - Ngày -Năm</small>
+                                </div>
+                                <button class="btn btn-success">Gửi yêu cầu</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
+    @if(isset($frees_2))
+        @foreach($frees_2 as $member)
             <div class="modal fade" id="free-{{$member->id}}" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
