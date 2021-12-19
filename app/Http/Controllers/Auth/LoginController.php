@@ -47,11 +47,11 @@ class LoginController extends Controller
 
         // Redirect here after successful login.
         $this->redirectTo = property_exists($this, 'redirectTo') ? $this->redirectTo
-            : backpack_url('dashboard');
+            : url('/');
 
         // Redirect here after logout.
         $this->redirectAfterLogout = property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout
-            : backpack_url('dashboard');
+            : url('/');
     }
 
     /**

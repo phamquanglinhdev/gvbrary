@@ -13,118 +13,236 @@
             </h3>
             <div class="card">
                 <div class="card-body">
-                    <form class="col-md-12 p-t-10" role="form" method="POST"
-                          action="{{ route('backpack.auth.register') }}">
-                        {!! csrf_field() !!}
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Cá nhân</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tổ chức</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <form class="col-md-12 p-t-10" role="form" id="personal" method="POST"
+                                  action="{{ route('backpack.auth.register') }}">
+                                {!! csrf_field() !!}
 
-                        <div class="form-group">
-                            <label class="control-label" for="name">Họ và tên</label>
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Họ và tên</label>
 
-                            <div>
-                                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                       name="name" id="name" value="{{ old('name') }}">
+                                    <div>
+                                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                               name="name" id="name" value="{{ old('name') }}">
 
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback">
+                                        @if ($errors->has('name'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label class="control-label"
-                                   for="{{ backpack_authentication_column() }}">{{ config('backpack.base.authentication_column_name') }}</label>
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="{{ backpack_authentication_column() }}">{{ config('backpack.base.authentication_column_name') }}</label>
 
-                            <div>
-                                <input type="{{ backpack_authentication_column()=='email'?'email':'text'}}"
-                                       class="form-control{{ $errors->has(backpack_authentication_column()) ? ' is-invalid' : '' }}"
-                                       name="{{ backpack_authentication_column() }}"
-                                       id="{{ backpack_authentication_column() }}"
-                                       value="{{ old(backpack_authentication_column()) }}">
+                                    <div>
+                                        <input type="{{ backpack_authentication_column()=='email'?'email':'text'}}"
+                                               class="form-control{{ $errors->has(backpack_authentication_column()) ? ' is-invalid' : '' }}"
+                                               name="{{ backpack_authentication_column() }}"
+                                               id="{{ backpack_authentication_column() }}"
+                                               value="{{ old(backpack_authentication_column()) }}">
 
-                                @if ($errors->has(backpack_authentication_column()))
-                                    <span class="invalid-feedback">
+                                        @if ($errors->has(backpack_authentication_column()))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first(backpack_authentication_column()) }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label class="control-label" for="password">Mật khẩu</label>
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Mật khẩu</label>
 
-                            <div>
-                                <input type="password"
-                                       class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                       name="password" id="password">
+                                    <div>
+                                        <input type="password"
+                                               class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                               name="password" id="password">
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label class="control-label"
-                                   for="password_confirmation">Xác nhận lại mật khẩu</label>
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="password_confirmation">Xác nhận lại mật khẩu</label>
 
-                            <div>
-                                <input type="password"
-                                       class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
-                                       name="password_confirmation" id="password_confirmation">
+                                    <div>
+                                        <input type="password"
+                                               class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
+                                               name="password_confirmation" id="password_confirmation">
 
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="invalid-feedback">
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label"
-                                   for="id_card">Số căn cước công dân</label>
-
-                            <div>
-                                <input type="text"
-                                       class="form-control"
-                                       name="id_card" id="id_card">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label"
-                                   for="id_card">Số điện thoại</label>
-
-                            <div>
-                                <input type="text"
-                                       class="form-control"
-                                       name="phone" id="phone">
-                            </div>
-                        </div>'
-
-                        <div class="form-group">
-                            <div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"
-                                               name="remember"> Tôi đồng ý với <a href="#" data-toggle="modal" data-target="#rule" class="text-info">Điều khoản dịch vụ</a>
-                                    </label>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div>
-                                <button type="submit" class="btn btn-block btn-info">
-                                    Đăng ký
-                                </button>
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="id_card">Số căn cước công dân</label>
+
+                                    <div>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="id_card" id="id_card">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="id_card">Số điện thoại</label>
+
+                                    <div>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="phone" id="phone">
+                                    </div>
+                                </div>'
+
+                                <div class="form-group">
+                                    <div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"
+                                                       name="remember"> Tôi đồng ý với <a href="#" data-toggle="modal" data-target="#rule" class="text-info">Điều khoản dịch vụ</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        <button type="submit" class="btn btn-block btn-info">
+                                            Đăng ký
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form class="col-md-12 p-t-10" role="form" id="bussiness" method="POST"
+                                  action="{{ route('backpack.auth.register') }}">
+                                {!! csrf_field() !!}
+
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Tên tổ chức</label>
+
+                                    <div>
+                                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                               name="name" id="name" value="{{ old('name') }}">
+
+                                        @if ($errors->has('name'))
+                                            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="{{ backpack_authentication_column() }}">{{ config('backpack.base.authentication_column_name') }}</label>
+
+                                    <div>
+                                        <input type="{{ backpack_authentication_column()=='email'?'email':'text'}}"
+                                               class="form-control{{ $errors->has(backpack_authentication_column()) ? ' is-invalid' : '' }}"
+                                               name="{{ backpack_authentication_column() }}"
+                                               id="{{ backpack_authentication_column() }}"
+                                               value="{{ old(backpack_authentication_column()) }}">
+
+                                        @if ($errors->has(backpack_authentication_column()))
+                                            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first(backpack_authentication_column()) }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <input type="hidden"
+                                       value="9"
+                                       name="role" id="role">
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Mật khẩu</label>
+
+                                    <div>
+                                        <input type="password"
+                                               class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                               name="password" id="password">
+
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="password_confirmation">Xác nhận lại mật khẩu</label>
+
+                                    <div>
+                                        <input type="password"
+                                               class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
+                                               name="password_confirmation" id="password_confirmation">
+
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           for="id_card">Số điện thoại</label>
+
+                                    <div>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="phone" id="phone">
+                                    </div>
+                                </div>'
+
+                                <div class="form-group">
+                                    <div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"
+                                                       name="remember"> Tôi đồng ý với <a href="#" data-toggle="modal" data-target="#rule" class="text-info">Điều khoản dịch vụ</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        <button type="submit"  class="btn btn-block btn-info">
+                                            Đăng ký
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             @if (backpack_users_have_email() && config('backpack.base.setup_password_recovery_routes', true))

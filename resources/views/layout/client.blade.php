@@ -104,7 +104,8 @@
                             <ul>
                                 <li><a href="#">Thuê sách</a></li>
                                 <li><a href="#">Cho thuê sách</a></li>
-                                <li><a href="{{route("products",'sach-mien-phi.aspx')}}">Sách miễn phí <span class="badge badge-success">Available</span></a>
+                                <li><a href="{{route("products",'sach-mien-phi.aspx')}}">Sách miễn phí <span
+                                            class="badge badge-success">Available</span></a>
                                 </li>
                                 @if(backpack_auth()->check())
                                     @if(backpack_user()->role==3)
@@ -132,14 +133,13 @@
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
                                     <li><a href="{{route("user.history")}}">Sách đã mượn (thuê)</a></li>
                                     <li><a href="{{route("purchase")}}">Nạp coin GVB</a></li>
-                                    <li><a href="{{route("backpack.auth.logout")}}">Đăng xuất</a></li>
-                                    @if(backpack_user()->role<=1)
-                                        <li><a href="#">Quản lý thanh toán</a></li>
-                                        <li><a href="{{route("request.index")}}">Quản lý yêu cầu mượn sách</a></li>
-                                    @endif
-                                    @if(backpack_user()->role==0)
+                                    <li><a href="#">Quản lý thanh toán</a></li>
+                                    <li><a href="{{route("request.index")}}">Quản lý yêu cầu mượn sách</a></li>
+                                    @if(backpack_user()->role==0 or backpack_user()->role==1)
                                         <li><a href="{{route("backpack.dashboard")}}">Quản trị</a></li>
                                     @endif
+                                    <li><a href="{{route("product.index")}}">Quản lý tủ sách</a></li>
+                                    <li><a href="{{route("backpack.auth.logout")}}">Đăng xuất</a></li>
                                 </ul>
                             </li>
                             <li class=""><a href="#"><i
@@ -241,7 +241,8 @@
             <form action="{{route("search")}}" method="POST">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="keyword" placeholder="Tìm theo tên sách , từ khóa ,..."
+                    <input type="text" class="form-control" name="keyword"
+                           placeholder="Tìm theo tên sách , từ khóa ,..."
                            aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i>

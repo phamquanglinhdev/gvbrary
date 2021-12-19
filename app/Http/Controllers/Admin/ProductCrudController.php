@@ -90,7 +90,7 @@ class ProductCrudController extends CrudController
         CRUD::field('name')->label("Tên sách");
         CRUD::field('price')->label("Giá cho thuê")->attributes(["placeholder" => "Để trống nếu miễn phí cho thuê"]);
         CRUD::field('description')->type("ckeditor")->label("Giới thiệu về sách");
-        if (backpack_user()->role <= 1) {
+        if (backpack_user()->role > 1) {
             if ($mode == 1) {
                 CRUD::field('status')->label("Trạng thái")->type("select_from_array")->options(["Còn sách", "Hết sách"]);
             } else {

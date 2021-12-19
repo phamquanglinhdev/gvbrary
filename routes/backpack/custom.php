@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DraftCrudController;
 use App\Http\Controllers\Admin\PostCrudController;
 use App\Http\Controllers\Admin\ProductCrudController;
+use App\Http\Controllers\XUploadController;
 use Illuminate\Support\Facades\Route;
 
 // --------------------------
@@ -30,6 +31,7 @@ Route::group([
     Route::crud('comment', 'CommentCrudController');
     Route::crud('coin', 'CoinCrudController');
     Route::crud('post', 'PostCrudController');
+    Route::get('x-upload',[XUploadController::class,"index"])->name("xupload");
     Route::get('draft',[ProductCrudController::class,"draft"])->name("draft");
     Route::get('draft/{slug}',[ProductCrudController::class,"showDraft","slug"])->where(["slug"])->name("show-draft");
     Route::get('draft/{id}/accept',[ProductCrudController::class,"acceptDraft","id"])->where(["id"])->name("accept-draft");
