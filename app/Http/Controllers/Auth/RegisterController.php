@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             backpack_authentication_column() => $data[backpack_authentication_column()],
             'password' => bcrypt($data['password']),
-            'role' => $data["role"] ?? null,
+            'role' => $data["role"] ?? 2,
             'id_card'=>$data["id_card"] ?? null,
             "phone"=>$data["phone"] ?? null,
         ]);
