@@ -20,7 +20,7 @@
 @section("content")
     <div class="container prolife">
         <div>
-            <div class="row">
+            <div class="row justify-content-lg-start align-items-lg-start">
                 <div class="left col-lg-4">
                     <div class="photo-left">
                         <img class="photo"

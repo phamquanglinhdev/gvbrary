@@ -102,8 +102,7 @@
                         <li class="submenu">
                             <a href="javascript:;">Dịch vụ</a>
                             <ul>
-                                <li><a href="#">Thuê sách</a></li>
-                                <li><a href="#">Cho thuê sách</a></li>
+                                <li><a href="{{route("product.index")}}">Cho thuê sách</a></li>
                                 <li><a href="{{route("products",'sach-mien-phi.aspx')}}">Sách miễn phí <span
                                             class="badge badge-success">Available</span></a>
                                 </li>
@@ -132,7 +131,7 @@
                                     <li><a href="{{route("user.profile")}}">Thông tin tài khoản</a></li>
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
                                     <li><a href="{{route("user.history")}}">Sách đã mượn (thuê)</a></li>
-                                    <li><a href="{{route("purchase")}}">Nạp coin GVB</a></li>
+                                    <li><a href="{{route("purchase")}}">Nạp coin</a></li>
                                     <li><a href="#">Quản lý thanh toán</a></li>
                                     <li><a href="{{route("request.index")}}">Quản lý yêu cầu mượn sách</a></li>
                                     @if(backpack_user()->role==0 or backpack_user()->role==1)
@@ -303,7 +302,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="under-footer">
-                    <p>Copyright © 2021 THPT Gia Vien B
+                    <p>Copyright © GVBARY
 
                         <br>Design: <a href="#" target="_parent" title="free css templates">HienDS</a>
                     </p>

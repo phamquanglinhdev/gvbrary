@@ -109,7 +109,7 @@ return [
     'developer_name' => 'Phamquanglinhdev',
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'http://fb.me/linhcuenini',
+    'developer_link' => 'https://fb.me/linhcuenini',
 
     // Show powered by Laravel Backpack in the footer? true/false
     'show_powered_by' => false,

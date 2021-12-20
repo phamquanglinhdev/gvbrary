@@ -30,20 +30,24 @@
         <div class="container">
             <div class="row">
                 @if($products->first()!=null)
-                    @foreach($products as $product)
-                        @if($product->status==0)
+                    @foreach($products as $key => $product)
+                        @if($key>=(($page-1)*12) && $key < $page*12)
                             <div class="col-lg-4">
                                 <div class="item">
                                     <div class="thumb">
                                         <div class="hover-content">
                                             <ul>
-                                                <li><a href="{{route("product",$product->slug)}}"><i class="fa fa-eye"></i></a></li>
-                                                <li><a href="{{route("product",$product->slug)}}"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="{{route("product",$product->slug)}}"><i class="fa fa-shopping-cart"></i></a>
+                                                <li><a href="{{route("product",$product->slug)}}"><i
+                                                            class="fa fa-eye"></i></a></li>
+                                                <li><a href="{{route("product",$product->slug)}}"><i
+                                                            class="fa fa-star"></i></a></li>
+                                                <li><a href="{{route("product",$product->slug)}}"><i
+                                                            class="fa fa-shopping-cart"></i></a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <a href="{{route("product",$product->slug)}}"><img src="{{$product->main_thumbnail}}" alt=""></a>
+                                        <a href="{{route("product",$product->slug)}}"><img
+                                                src="{{$product->main_thumbnail}}" alt=""></a>
                                     </div>
                                     <a href="{{route("product",$product->slug)}}">
                                         <div class="down-content p-2">
@@ -64,23 +68,39 @@
                 @endif
                 <div class="col-lg-12">
                     <div class="pagination">
-                        <ul>
-                            <li class="active">
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">></a>
-                            </li>
-                        </ul>
+                        @if(!isset($method))
+                            <ul>
+                                @if(isset($count))
+                                    @for($i=1;$i<=$count+1;$i++)
+                                        @if($i==$page)
+                                            <li class="active">
+                                                <a href="{{route("products",$category->slug."/$i")}}">{{$i}}</a>
+                                            </li>
+                                        @else
+                                            <li>
+                                                <a href="{{route("products",$category->slug."/$i")}}">{{$i}}</a>
+                                            </li>
+                                        @endif
+                                    @endfor
+                                @endif
+                            </ul>
+                        @else
+                            <ul>
+                                @if(isset($count))
+                                    @for($i=1;$i<=$count+1;$i++)
+                                        @if($i==$page)
+                                            <li class="active">
+                                                <a href="{{route("tags",$category->slug."/$i")}}">{{$i}}</a>
+                                            </li>
+                                        @else
+                                            <li>
+                                                <a href="{{route("tags",$category->slug."/$i")}}">{{$i}}</a>
+                                            </li>
+                                        @endif
+                                    @endfor
+                                @endif
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>

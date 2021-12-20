@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-content">
-                        <h2>Nạp GVB Coin</h2>
+                        <h2>Nạp Coin</h2>
                         <span></span>
                     </div>
                 </div>
@@ -39,8 +39,8 @@
                             <div class="h4">Thông tin thanh toán qua <span
                                     class="font-weight-bold text-primary">ATM</span></div>
                             <hr>
-                            <div>Số tài khoản : <span class="font-weight-bold">48310000691176</span></div>
-                            <div>Tên tài khoản : <span class="font-weight-bold">PHAM QUANG LINH</span></div>
+                            <div>Số tài khoản : <span class="font-weight-bold">48310000691178</span></div>
+                            <div>Tên tài khoản : <span class="font-weight-bold">DANG VAN DANG</span></div>
                             <div> Ngân Hàng : <span class="font-weight-bold">BIDV</span></div>
                             <div>Chi nhánh : <span class="font-weight-bold">Ninh Bình</span></div>
                             <div>Nội dung chuyển khoản : <span
@@ -62,8 +62,8 @@
                             <div class="h4">Thông tin thanh toán <span class="font-weight-bold text-pink">MOMO</span>
                             </div>
                             <hr>
-                            <div>Số điện thoại : <span class="font-weight-bold">0904.800.240</span></div>
-                            <div>Tên tài khoản : <span class="font-weight-bold">Phạm Quang Linh</span></div>
+                            <div>Số điện thoại : <span class="font-weight-bold">0904.800.2xx</span></div>
+                            <div>Tên tài khoản : <span class="font-weight-bold">Phan Văn A</span></div>
                             <div>Nội dung chuyển khoản : <span
                                     class="font-weight-bold text-pink">GVBCOIN {{backpack_user()->id}}</span></div>
                             <br>
@@ -86,11 +86,12 @@
                                         <option selected disabled value="">Phương thức nạp</option>
                                         <option value="atm">ATM</option>
                                         <option value="momo">MOMO</option>
+                                        <option value="point">Điểm tích lũy</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" name="value" type="number" placeholder="Số tiền" required>
+                                           aria-describedby="emailHelp" name="value" type="number" placeholder="Giá trị" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Gửi</button>
                             </div>

@@ -13,7 +13,7 @@
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('comment') }}'><i class='nav-icon la la-comment'></i> Bình luận đang chờ</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('post') }}'><i class='nav-icon la la-pinterest'></i>Tin tức/Bài viết</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ route('draft') }}'><i class='nav-icon la la-warning'></i>Ấn phẩm chờ duyệt</a></li>
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('coin') }}'><i class='nav-icon la la-coins'></i> Yêu cầu nạp tiền</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('coin') }}'><i class='nav-icon la la-coins'></i>Coin tích lũy</a></li>
 @endif
 <li class="nav-title">Chức năng dành cho cá nhân </li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('product') }}'><i class='nav-icon  la la-book'></i> Ấn
@@ -33,3 +33,5 @@
 
 
 
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('tag') }}'><i class='nav-icon la la-question'></i> Tags</a></li>

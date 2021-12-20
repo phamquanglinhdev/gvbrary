@@ -47,6 +47,9 @@
                             Ngày đăng: {{$product->updated_at}}
                         </div>
                         <div>
+                            Ngày đăng: {{$product->Tags()->get()}}
+                        </div>
+                        <div>
                             <ul style="display: flex">
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>

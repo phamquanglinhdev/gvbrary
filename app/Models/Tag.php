@@ -6,7 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Product extends Model
+class Tag extends Model
 {
     use CrudTrait;
 
@@ -16,7 +16,7 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'products';
+    protected $table = 'tags';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -29,40 +29,17 @@ class Product extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function setSlugAttribute()
-    {
+    public function setSlugAttribute(){
 
-        $this->attributes['slug'] = Str::slug($this->name, "-") . ".aspx";
+        $this->attributes['slug'] = Str::slug($this->name,"-").".aspx";
     }
-
-    public function viewOnWeb()
-    {
-        return "<a class='btn btn-sm btn-link' target='_blank' href='" . route("product", $this->slug) . "'><i class ='la la-eye'></i>Preview</a>";
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function Category()
-    {
-        return $this->belongsTo(Category::class, "category_id", "id");
-    }
-
-    public function Published()
-    {
-        return $this->belongsTo(User::class, "published_id", "id");
-    }
-
-    public function Comment()
-    {
-        return $this->hasMany(Comment::class, "product_id", "id");
-    }
-
-    public function Tags()
-    {
-        return $this->belongsToMany(Tag::class, "product_tag", "product_id","tag_id");
+    public function Products(){
+        return $this->belongsToMany(Product::class,"product_tag","tag_id","product_id");
     }
     /*
     |--------------------------------------------------------------------------

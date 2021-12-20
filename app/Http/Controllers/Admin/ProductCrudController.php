@@ -49,6 +49,19 @@ class ProductCrudController extends CrudController
             $this->crud->addClause("where", "published_id", "=", backpack_user()->id);
         }
         CRUD::column('name')->label("Tên sách");
+        CRUD::addColumn(
+            [   // relationship
+                'type' => "relationship",
+                'name' => 'Tags', // the method on your model that defines the relationship
+
+                // OPTIONALS:
+                'label' => "Thể loại ấn phẩm",
+                'attribute' => "name",
+                'entity' => 'Tags', // the method that defines the relationship in your Model
+                'model' => "App\Models\Tag", // foreign key Eloquent model
+                'placeholder' => "Chọn nhiều", // placeholder for the select2 input
+            ]
+        );
         CRUD::column('price')->label("Giá thuê");
         CRUD::column('status')->label("Trạng thái")->type("select_from_array")->options(["Còn sách", "Hết sách","Đang chờ duyệt","Bị từ chối"]);
         CRUD::column('main_thumbnail')->type("image")->label("Ảnh");
@@ -85,9 +98,20 @@ class ProductCrudController extends CrudController
     protected function setupCreateOperation($mode = 0)
     {
         CRUD::setValidation(ProductRequest::class);
-
-
         CRUD::field('name')->label("Tên sách");
+        CRUD::addField(
+            [   // relationship
+                'type' => "relationship",
+                'name' => 'Tags', // the method on your model that defines the relationship
+
+                // OPTIONALS:
+                'label' => "Thể loại ấn phẩm",
+                'attribute' => "name",
+                'entity' => 'Tags', // the method that defines the relationship in your Model
+                'model' => "App\Models\Tag", // foreign key Eloquent model
+                'placeholder' => "Chọn nhiều", // placeholder for the select2 input
+            ]
+        );
         CRUD::field('price')->label("Giá cho thuê")->attributes(["placeholder" => "Để trống nếu miễn phí cho thuê"]);
         CRUD::field('description')->type("ckeditor")->label("Giới thiệu về sách");
         if (backpack_user()->role > 1) {
@@ -99,18 +123,21 @@ class ProductCrudController extends CrudController
         }
         CRUD::addField([
             'name' => 'first_thumbnail',
+            'label'=>'Ảnh bìa thứ nhất',
             'type' => 'image',
             'crop' => true,
             'aspect_ratio' => 2,
         ]);
         CRUD::addField([
             'name' => 'second_thumbnail',
+            'label'=>'Ảnh bìa thứ hải',
             'type' => 'image',
             'crop' => true,
             'aspect_ratio' => 2,
         ]);
         CRUD::addField([
             'name' => 'main_thumbnail',
+            'label'=>'Ảnh bìa chính',
             'type' => 'image',
             'crop' => true,
             'aspect_ratio' => 1,
@@ -147,6 +174,8 @@ class ProductCrudController extends CrudController
             'type' => 'hidden',
             'value' => backpack_user()->id,
         ]);
+
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

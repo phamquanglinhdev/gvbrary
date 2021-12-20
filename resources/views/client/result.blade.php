@@ -63,8 +63,6 @@
                             </div>
                         @endif
                     @endforeach
-                @else
-                    <div class="p-5 h1 w-100 text-center">Không có sản phẩm phù hợp</div>
                 @endif
                 {{--                <div class="col-lg-12">--}}
                 {{--                    <div class="pagination">--}}
@@ -90,7 +88,7 @@
             </div>
         </div>
     </section>
-
+    <hr>
     @if(isset($categories))
         <section class="section" id="categories">
             <div class="container">
@@ -112,6 +110,35 @@
                                 <span class="badge badge-primary badge-pill p-2">Ấn phẩm : {{$category->Products()->count()}}</span>
 
                         </li>
+                        </a>
+                        <hr>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+    @endif
+    <hr>
+    @if(isset($tags))
+        <section class="section" id="categories">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading text-center">
+                            <h2>Thể loại </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container pt-4 ">
+                <ul class="list-group">
+                    @foreach($tags as $category)
+                        <a href="{{route("tags",$category->slug)}}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                                <span class="text-dark">{{$category->name}}</span>
+                                <span class="badge badge-primary badge-pill p-2">Ấn phẩm : {{$category->Products()->count()}}</span>
+
+                            </li>
                         </a>
                         <hr>
                     @endforeach
