@@ -87,7 +87,7 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav col-md-10 col-12">
-                        <li class="scroll-to-section"><a href="{{route("index")}}" class="active">Trang chủ</a></li>
+{{--                        <li class="scroll-to-section"><a href="{{route("index")}}" class="active">Trang chủ</a></li>--}}
                         <li class="submenu">
                             <a href="javascript:;">Danh sách</a>
                             <ul>
@@ -96,6 +96,17 @@
                                 @endphp
                                 @foreach($categories as $category)
                                     <li><a href="{{route("products",$category->slug)}}">{{$category->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:;">Thể loại</a>
+                            <ul>
+                                @php
+                                    $tags =  \App\Models\Tag::get();
+                                @endphp
+                                @foreach($tags as $tag)
+                                    <li><a href="{{route("tags",$tag->slug)}}">{{$tag->name}}</a></li>
                                 @endforeach
                             </ul>
                         </li>

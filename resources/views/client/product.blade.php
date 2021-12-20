@@ -47,7 +47,10 @@
                             Ngày đăng: {{$product->updated_at}}
                         </div>
                         <div>
-                            Ngày đăng: {{$product->Tags()->get()}}
+                            Thể loại:
+                            @foreach($product->Tags()->get() as $tag)
+                                <a href="{{route("tags",$tag->slug)}}"><div class="badge badge-primary">{{$tag->name}}</div></a>
+                            @endforeach
                         </div>
                         <div>
                             <ul style="display: flex">

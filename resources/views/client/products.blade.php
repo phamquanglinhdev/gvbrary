@@ -28,6 +28,44 @@
             </div>
         </div>
         <div class="container">
+            <hr>
+            <div class="row justify-content-center align-items-center">
+                @php
+                    $categories = \App\Models\Category::get();
+                    $tags = \App\Models\Tag::get();
+                @endphp
+                <div class="col-md-6 col-12">
+                    <div class="dropdown w-100">
+                        <button class=" w-100 btn btn-secondary dropdown-toggle" type="button" id="categories"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Danh mục
+                        </button>
+                        <div class="dropdown-menu w-100" aria-labelledby="categories">
+                            @if(isset($categories))
+                                @foreach($categories as $category)
+                                    <a class="dropdown-item" href="{{route("products",$category->slug)}}">{{$category->name}}</a>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="dropdown w-100">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="tags"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Thể loại
+                        </button>
+                        <div class="dropdown-menu w-100" aria-labelledby="tags">
+                            @if(isset($tags))
+                                @foreach($tags as $tag)
+                                    <a class="dropdown-item" href="{{route("tags",$tag->slug)}}">{{$tag->name}}</a>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <div class="row">
                 @if($products->first()!=null)
                     @foreach($products as $key => $product)

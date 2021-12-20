@@ -20,10 +20,10 @@
         phẩm</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('request') }}'><i class='nav-icon las la-money-check'></i>
         Yêu cầu mượn sách</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('tag') }}'><i class='nav-icon la la-question'></i> Thể loại sách</a></li>
 @if(backpack_user()->role==9)
     <li class="nav-title">Chức năng dành cho tổ chức </li>
-    <li class="nav-title">(Chưa xác minh)</li>
-    <li class='nav-item'><a class='nav-link' href='{{route("xupload")}}'><i class='nav-icon las la-user-check'></i>Xác minh tổ chức</a></li>
+{{--    <li class='nav-item'><a class='nav-link' href='{{route("xupload")}}'><i class='nav-icon las la-user-check'></i>Xác minh tổ chức</a></li>--}}
     <li class='nav-item disabled'><a class='nav-link text-muted'><i class='nav-icon las la-file-excel'></i><del>Nhập hàng loạt</del></a></li>
 @endif
 @if(backpack_user()->role==8)
@@ -34,4 +34,4 @@
 
 
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('tag') }}'><i class='nav-icon la la-question'></i> Tags</a></li>
+

@@ -50,6 +50,7 @@ class ProductController extends Controller
         $product = Product::where("slug", "=", $slug)->first();
         if (isset($product)) {
             if ($product->status == 0) {
+
                         return view("client.product",["product"=>$product]);
             } else {
                 return view("errors.404");

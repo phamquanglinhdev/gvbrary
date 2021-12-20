@@ -30,6 +30,9 @@ class TagCrudController extends CrudController
         CRUD::setModel(\App\Models\Tag::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/tag');
         CRUD::setEntityNameStrings('Thể loại', 'Các thể loại');
+        if(backpack_user()->role >= 2){
+            $this->crud->denyAccess(["edit"]);
+        }
     }
 
     /**
