@@ -45,6 +45,14 @@ class ProductController extends Controller
         }
     }
 
+    public function indexNew(){
+        $products =  Product::orderBy("created_at","DESC")->limit(12)->get();
+        $category = new \stdClass();
+        $category->name = "Sách mới cập nhật";
+        if(isset($products)){
+            return view("client.products", ['products' => $products,'category'=>$category,'page'=>1]);
+        }
+    }
     public function show($slug)
     {
         $product = Product::where("slug", "=", $slug)->first();

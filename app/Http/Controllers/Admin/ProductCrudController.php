@@ -120,6 +120,8 @@ class ProductCrudController extends CrudController
             } else {
                 CRUD::field('status')->label("Trạng thái")->type("hidden")->value(2);
             }
+        }else{
+            CRUD::field('status')->label("Trạng thái")->type("select_from_array")->options(["Còn sách", "Hết sách"]);
         }
         CRUD::addField([
             'name' => 'first_thumbnail',

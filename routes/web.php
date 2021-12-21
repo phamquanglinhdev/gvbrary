@@ -31,6 +31,7 @@ Route::get('/',[IndexController::class,"index"])->name("index");
 Route::get("/products/{category?}/{page?}",[ProductController::class,"index","category","page"])->where(["category","page"])->name("products");
 Route::get("/tags/{tag?}/{page?}",[ProductController::class,"indexByTags","tag","page"])->where(["tag","page"])->name("tags");
 Route::get("/product/{slug}",[ProductController::class,"show","slug"])->where(["slug"])->name("product");
+Route::get("/daily",[ProductController::class,"indexNew"])->name("daily");
 Route::get("/about",[AboutController::class,"index"])->name("about");
 Route::get("/contact",[ContactController::class,"index"])->name("contact");
 Route::get("/cart",[CartController::class,"index"])->name("cart");

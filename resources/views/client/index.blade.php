@@ -22,7 +22,7 @@
                                 <h2 class="text-white font-weight-bold d-sm-none d-block">Khám phá sách mới</h2>
                                 <span>Sách mới đã được cập nhật, xem ngay nào !!!</span>
                                 <div class="main-border-button">
-                                    <a href="#">Khám phá ngay</a>
+                                    <a href="{{route("daily")}}">Khám phá ngay</a>
                                 </div>
                             </div>
                             <img src="{{asset("assets/images/left-banner-image.jpg")}}" alt="">
