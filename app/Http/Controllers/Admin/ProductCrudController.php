@@ -35,6 +35,7 @@ class ProductCrudController extends CrudController
         CRUD::setEntityNameStrings('Ấn phẩm', 'Các ấn phẩm');
         $this->crud->addButtonFromModelFunction("line", "viewOnWeb", "viewOnWeb", "line");
         $this->crud->denyAccess("show");
+        $this->crud->addButtonFromModelFunction("top","guide","guide","top");
     }
 
     /**

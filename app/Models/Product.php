@@ -64,6 +64,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, "product_tag", "product_id","tag_id");
     }
+    public function guide(){
+        return "<a href='https://youtu.be/apiztfHdRZA' class='btn btn-primary text-white'>Xem hướng dẫn đăng ấn phẩm đẹp</a>";
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
