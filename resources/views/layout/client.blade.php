@@ -111,17 +111,13 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:;">Dịch vụ</a>
+                            <a href="javascript:;">Giới thiệu</a>
                             <ul>
-                                <li><a href="{{route("product.index")}}">Cho thuê sách</a></li>
-                                <li><a href="{{route("products",'sach-mien-phi.aspx')}}">Sách miễn phí <span
-                                            class="badge badge-success">Available</span></a>
-                                </li>
-                                @if(backpack_auth()->check())
-                                    @if(backpack_user()->role==3)
-                                        <li><a href="{{route("user.verification")}}">Xác mình học sinh GVB</a></li>
-                                    @endif
-                                @endif
+
+                                <li><a href="{{route("about")}}">Về chúng tôi</a></li>
+                                <li><a href="{{route("contact")}}">Liên hệ</a></li>
+
+
                             </ul>
                         </li>
                         @if(backpack_auth()->check())
@@ -139,11 +135,17 @@
                                     @endif
                                 </a>
                                 <ul>
+                                    @if(backpack_auth()->check())
+                                        @if(backpack_user()->role==3)
+                                            <li><a href="{{route("user.verification")}}">Xác mình học sinh GVB</a></li>
+                                        @endif
+                                    @endif
                                     <li><a href="{{route("user.profile")}}">Thông tin tài khoản</a></li>
                                     <li><a href="#">Lịch sử tìm kiếm</a></li>
                                     <li><a href="{{route("user.history")}}">Sách đã mượn (thuê)</a></li>
                                     <li><a href="{{route("purchase")}}">Nạp coin</a></li>
                                     <li><a href="#">Quản lý thanh toán</a></li>
+                                    <li><a href="{{route("product.index")}}">Cho thuê sách</a></li>
                                     <li><a href="{{route("request.index")}}">Quản lý yêu cầu mượn sách</a></li>
                                     @if(backpack_user()->role==0 or backpack_user()->role==1)
                                         <li><a href="{{route("backpack.dashboard")}}">Quản trị</a></li>
@@ -153,7 +155,7 @@
                                 </ul>
                             </li>
                             <li class=""><a href="#"><i
-                                        class="fas fa-coins"></i> {{number_format(backpack_user()->coin)}} đ</a></li>
+                                        class="fas fa-coins"></i> {{number_format(backpack_user()->coin)}}</a></li>
                             <li class="">
                                 <a href="{{route("cart")}}"><i class="fas fa-cart-plus"></i>
                                     <div class="badge badge-danger">
@@ -275,8 +277,8 @@
                     </div>
                     <ul>
                         <li><a href="#">Gia Lập, Gia Viễn, Ninh Bình</a></li>
-                        <li><a href="mailto:thptgvb@gmail.com">thptgvb@gmail.com</a></li>
-                        <li><a href="tel:02293868103">0229 3868 103</a></li>
+                        <li><a href="mailto:thptgvb@gmail.com">gvbary@gmail.com</a></li>
+                        <li><a href="tel:02293868103">0852 629 555</a></li>
                     </ul>
                 </div>
             </div>
